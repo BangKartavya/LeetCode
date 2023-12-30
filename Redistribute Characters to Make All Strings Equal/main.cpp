@@ -1,67 +1,20 @@
-//{ Driver Code Starts
-#include <iostream>
-#include <map>
-#include <algorithm>
-#include <cstdlib>
-#include<bits/stdc++.h>
-
-using namespace std;
-
-
-// } Driver Code Ends
-
-class Solution{
-  public:
-
-    //Function to return the name of candidate that received maximum votes.
-    vector<string> winner(string arr[],int n)
-    {
-        map<string,int> mp;
+class Solution {
+public:
+    bool makeEqual(vector<string>& words) {
+        if(words.size()==1) return true;
         
-        for(int i =0;i<n;i++) {
-            mp[arr[i]]++;
-        }
+        int total = 0;
         
+        for(auto s:words) total+=s.length();
         
+        if(total%words.size()!=0) return false;
         
-        int maxi = -1;
-        string maxiSmallName = arr[0];
+        vector<int> myMap(26,0);
         
-        for(auto i: mp) {
-            if(i.second>maxi) {
-                maxi = i.second;
-                maxiSmallName = i.first;
-            }
-            if(i.second==maxi) if(i.first<maxiSmallName) maxiSmallName = i.first;
-            }
-        return {maxiSmallName,to_string(maxi)};
+        for(auto s:words) for(auto c: s) myMap[c-'a']++;
+        
+        for(auto i:myMap) if(i%words.size()!=0) return false;
+        
+        return true;
     }
 };
-
-//{ Driver Code Starts.
-
-int main()
-{
-    int t;
-    cin>>t;
-    
-    for(int i=0;i<t;i++)
-    {
-        
-        
-        int n;
-        cin>>n;
-        
-        string arr[n];
-        
-        for (int i=0;i<n;i++)
-        cin>>arr[i];
-        Solution obj;
-        vector<string> result = obj.winner(arr,n);
-        
-        cout<<result[0] << " " << result[1] << endl;
-    }
-    return 0;
-}
-
-// } Driver Code Ends
