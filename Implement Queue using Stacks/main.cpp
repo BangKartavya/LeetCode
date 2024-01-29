@@ -1,26 +1,36 @@
 class MyQueue {
 public:
-    vector<int> vtk;
+    stack<int> stk1;
+    stack<int> stk2;
     MyQueue() {
         
     }
     
     void push(int x) {
-        vtk.push_back(x);
+        while(!stk1.empty()) {
+            stk2.push(stk1.top());
+            stk1.pop();
+        }
+        stk2.push(x);
+
+        while(!stk2.empty()) {
+            stk1.push(stk2.top());
+            stk2.pop();
+        }
     }
     
     int pop() {
-        int x = vtk[0];
-        vtk.erase(vtk.begin());
+        int x = stk1.top();
+        stk1.pop();
         return x;
     }
     
     int peek() {
-        return vtk[0];
+        return stk1.top();
     }
     
     bool empty() {
-        return vtk.empty();
+        return stk1.empty();
     }
 };
 
