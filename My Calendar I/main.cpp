@@ -1,18 +1,17 @@
 class MyCalendar {
 public:
-    map<int,int> mp;
-    MyCalendar() {
-    }
-    
-    bool book(int start, int end) {
-        auto p = mp.upper_bound(start);
+  map<int, int> mp;
+  MyCalendar() {}
 
-        if(p == mp.end() || end <= p->second) {
-            mp[end] = start;
-            return true;
-        }
-        return false;
+  bool book(int start, int end) {
+    auto p = mp.upper_bound(start);
+
+    if (p == mp.end() || end <= p->second) {
+      mp[end] = start;
+      return true;
     }
+    return false;
+  }
 };
 
 /**
