@@ -13,7 +13,7 @@ public:
             if(j == i+1) continue;
 
             if(count == 0) count += (j-i);
-            else count += (j-i-1);
+            else count += (j-i-1)x;
             i = j-1;
         }
 
